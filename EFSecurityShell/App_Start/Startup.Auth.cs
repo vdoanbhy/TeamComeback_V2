@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using EFSecurityShell.Models;
+using TeamComeback_V2.Models;
 
-namespace EFSecurityShell
+namespace TeamComeback_V2
 {
     public partial class Startup
     {

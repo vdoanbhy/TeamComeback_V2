@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace EFSecurityShell.Models
+namespace TeamComeback_V2.Models
 {
     public class EditUserViewModel
     {

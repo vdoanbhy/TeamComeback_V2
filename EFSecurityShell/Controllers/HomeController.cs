@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace EFSecurityShell.Controllers
+namespace TeamComeback_V2.Controllers
 {
     public class HomeController : Controller
     {
@@ -13,7 +13,7 @@ namespace EFSecurityShell.Controllers
             return View();
         }
 
-        [Authorize]
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

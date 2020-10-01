@@ -3,13 +3,32 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - EF Security Shell 2019</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 offset-0">
+                    <a href="/TeamComeBack/"><img src="~/Content/images/logo.png" class="Logo" alt="logo"></a>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 offset-0">
+                    <a href="#"><img src="~/Content/images/contact-us.png" class="right" alt="contact"></a>
+                    <a href="#"><img src="~/Content/images/program-calendar.png" class="right" alt="calendar"></a>
+                    <a href="#"><img src="~/Content/images/donate-now.png" class="right" alt="donate"></a>
+                    <a href="#"><img src="~/Content/images/facebook.png" class="socialMedia right" alt="facebook"></a>
+                    <a href="#"><img src="~/Content/images/instagram.png" class="instagram right" alt="facebook"></a>
+                    <a href="#"><img src="~/Content/images/twitter.png" class="socialMedia right" alt="facebook"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,7 +36,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("EF Security Shell", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Team ComeBack", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -25,17 +44,18 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
-
+                    <li>@Html.ActionLink("Feedback", "Index", "Feedback")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
+
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - EF Security Shell</p>
+            <p>&copy; @DateTime.Now.Year - Team ComeBack ASP.NET Application</p>
         </footer>
     </div>
 

@@ -6,12 +6,12 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
 using System.Net;
-using EFSecurityShell.Models;
+using TeamComeback_V2.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 
-namespace EFSecurityShell.Controllers
+namespace TeamComeback_V2.Controllers
 {
     public class UsersAdminController : Controller
     {

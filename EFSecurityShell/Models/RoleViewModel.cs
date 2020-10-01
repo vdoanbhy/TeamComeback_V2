@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace EFSecurityShell.Models
+namespace TeamComeback_V2.Models
 {
     public class RoleViewModel
     {

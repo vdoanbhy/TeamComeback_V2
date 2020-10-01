@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace EFSecurityShell
+namespace TeamComeback_V2
 {
     public class BundleConfig
     {

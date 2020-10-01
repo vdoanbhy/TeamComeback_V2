@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace EFSecurityShell.Controllers
+namespace TeamComeback_V2.Controllers
 {
     public class AdminController : Controller
     {

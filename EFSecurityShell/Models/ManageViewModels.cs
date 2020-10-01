@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace EFSecurityShell.Models
+namespace TeamComeback_V2.Models
 {
     public class IndexViewModel
     {

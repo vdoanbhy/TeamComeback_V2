@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFSecurityShell", "EFSecurityShell\EFSecurityShell.csproj", "{091ED1F4-9AE4-4959-9075-49214FC1D620}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamComeback_V2", "EFSecurityShell\TeamComeback_V2.csproj", "{091ED1F4-9AE4-4959-9075-49214FC1D620}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3A07134-D8DA-4291-9B3B-04279066BDDB}
 	EndGlobalSection
 EndGlobal

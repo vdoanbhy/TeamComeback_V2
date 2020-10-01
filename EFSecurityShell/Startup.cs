@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(EFSecurityShell.Startup))]
-namespace EFSecurityShell
+[assembly: OwinStartupAttribute(typeof(TeamComeback_V2.Startup))]
+namespace TeamComeback_V2
 {
     public partial class Startup
     {
