@@ -13,8 +13,12 @@ namespace TeamComeback_V2.Models
         {
             IList<Course> defaultCourses = new List<Course>();
             IList<Member> defaultMembers = new List<Member>();
-            defaultCourses.Add(new Course() { Name = "PT20-001", Terms = Terms.Fall, Year = "2020", Day = "MWF", Time = "5:00 pm - 7:30 pm", InstructorName = "John Doe", Cost = 35.99 });
-            defaultCourses.Add(new Course() { Name = "PT20-002", Terms = Terms.Fall, Year = "2020", Day = "TThS", Time = "5:00 pm - 7:30 pm", InstructorName = "John Doe", Cost = 35.99 });
+            defaultCourses.Add(new Course() { Name = "L1-World Games 1", Terms = Terms.Fall, Year = "2020", Day = DayOfWeek.Monday, Time = "10:00 am - 10:20 am", InstructorName = "John Doe", Cost = 19.99 });
+            defaultCourses.Add(new Course() { Name = "L1-Escape This", Terms = Terms.Fall, Year = "2020", Day = DayOfWeek.Monday, Time = "10:20 am - 10:40 am", InstructorName = "Zoe Doe", Cost = 19.99 });
+            defaultCourses.Add(new Course() { Name = "L1-Presentation Group", Terms = Terms.Fall, Year = "2020", Day = DayOfWeek.Monday, Time = "10:40 am - 10:00 am", InstructorName = "Dave Doe", Cost = 19.99 });
+            defaultCourses.Add(new Course() { Name = "L2-Select Topics 2", Terms = Terms.Fall, Year = "2020", Day = DayOfWeek.Tuesday, Time = "10:00 am - 10:20 am", InstructorName = "Jim Doe", Cost = 25.99 });
+            defaultCourses.Add(new Course() { Name = "L2-Number Crunchers", Terms = Terms.Fall, Year = "2020", Day = DayOfWeek.Tuesday, Time = "10:20 am - 10:40 am", InstructorName = "Joe Doe", Cost = 25.99 });
+            defaultCourses.Add(new Course() { Name = "AL-Slow Road to Better", Terms = Terms.Fall, Year = "2020", Day = DayOfWeek.Tuesday, Time = "10:40 am - 11:00 am", InstructorName = "Amy Doe", Cost = 15.99 });
             defaultMembers.Add(new Member() { LastName = "Doe", FirstName = "Jane", Gender = Gender.Female, DoB = "01/01/1980", Address = "123 abc str", City = "Fairfax", State = State.VA, Zip = 22031, PhoneNumber = "123-123-3213",DateOfLastStroke = "01/01/2016"});
             context.Courses.AddRange(defaultCourses);
             context.Members.AddRange(defaultMembers);

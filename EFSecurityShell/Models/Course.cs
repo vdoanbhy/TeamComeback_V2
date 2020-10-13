@@ -19,7 +19,7 @@ namespace TeamComeback_V2.Models
         public string Name { get; set; }
         public Terms? Terms { get; set; }
         public string Year { get; set; }
-        public string Day { get; set; }
+        public DayOfWeek Day { get; set; }
         public string Time { get; set; }
         [Display(Name = "Instructor Name")]
         public string InstructorName { get; set; }
