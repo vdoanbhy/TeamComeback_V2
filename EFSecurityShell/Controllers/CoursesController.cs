@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TeamComeback_V2.Data;
@@ -16,9 +17,16 @@ namespace TeamComeback_V2.Controllers
         private TeamComeback_V2Context db = new TeamComeback_V2Context();
 
         // GET: Courses
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            return View(db.Courses.ToList());
+            var courses = from c in db.Courses
+                           select c;
+            if (!String.IsNullOrEmpty(search))
+            {
+                courses = courses.Where(s => s.Name.Contains(search));
+                ViewBag.Search = search;
+            }
+            return View(courses.ToList());
         }
 
         // GET: Courses/Details/5

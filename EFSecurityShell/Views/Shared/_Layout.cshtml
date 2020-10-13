@@ -17,12 +17,12 @@
                     <a href="/TeamComeBack/"><img src="~/Content/images/logo.png" class="Logo" alt="logo"></a>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 offset-0">
-                    <a href="#"><img src="~/Content/images/contact-us.png" class="right" alt="contact"></a>
-                    <a href="#"><img src="~/Content/images/program-calendar.png" class="right" alt="calendar"></a>
-                    <a href="#"><img src="~/Content/images/donate-now.png" class="right" alt="donate"></a>
-                    <a href="#"><img src="~/Content/images/facebook.png" class="socialMedia right" alt="facebook"></a>
-                    <a href="#"><img src="~/Content/images/instagram.png" class="instagram right" alt="facebook"></a>
-                    <a href="#"><img src="~/Content/images/twitter.png" class="socialMedia right" alt="facebook"></a>
+                    <a href="/Home/Contact"><img src="~/Content/images/contact-us.png" class="right" alt="contact"></a>
+                    <a href="https://strokecomebackcenter.org/programs/virtual-calendar/"><img src="~/Content/images/program-calendar.png" class="right" alt="calendar"></a>
+                    <a href="https://strokecomebackcenter.org/donate-now/"><img src="~/Content/images/donate-now.png" class="right" alt="donate"></a>
+                    <a href="https://www.facebook.com/StrokeComebackCenter"><img src="~/Content/images/facebook.png" class="socialMedia right" alt="facebook"></a>
+                    <a href="https://www.instagram.com/strokecomeback/"><img src="~/Content/images/instagram.png" class="instagram right" alt="instagram"></a>
+                    <a href="https://twitter.com/StrokeComeback"><img src="~/Content/images/twitter.png" class="socialMedia right" alt="twitter"></a>
                 </div>
             </div>
         </div>
@@ -45,15 +45,26 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
-                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Admin Action<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
+                                <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
+                            </ul>
+                        </li>
                     }
-
                 </ul>
-                
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("Index", "Courses", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                    {
+                        <div class="form-group">
+                            @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search" })
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>}
+                    }
                 @Html.Partial("_LoginPartial")
             </div>
-
         </div>
     </div>
     <div class="container body-content">
