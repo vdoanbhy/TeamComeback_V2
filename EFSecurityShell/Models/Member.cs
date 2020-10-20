@@ -27,6 +27,7 @@ namespace TeamComeback_V2.Models
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         public Gender? Gender { get; set; }
+        [Required]
         public string DoB { get; set; }
         public string Address { get; set; }
         public string City { get; set; }

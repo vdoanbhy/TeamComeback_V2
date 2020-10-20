@@ -19,8 +19,10 @@ namespace TeamComeback_V2.Models
         public string Name { get; set; }
         public Terms? Terms { get; set; }
         public string Year { get; set; }
+        [Required]
         public DayOfWeek Day { get; set; }
         public string Time { get; set; }
+        [Required]
         [Display(Name = "Instructor Name")]
         public string InstructorName { get; set; }
         public double Cost { get; set; }
