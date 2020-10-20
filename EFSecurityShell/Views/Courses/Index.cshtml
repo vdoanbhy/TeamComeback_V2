@@ -9,6 +9,12 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("Index", "Courses", FormMethod.Get))
+{
+    <label>Filter by year:</label> @Html.DropDownList("Year", "All")
+    <input type="submit" value="Filter" />
+    <input type="hidden" name="Search" id="Search" value="@ViewBag.Search" />
+}
 <table class="table">
     <tr>
         <th>
@@ -35,35 +41,72 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Terms)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Day)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InstructorName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cost)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CourseID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CourseID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CourseID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Terms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstructorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CourseID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CourseID })
+            </td>
+        </tr>
+    }
 
 </table>
+<table class="table">
+    <tr>
+        <th>
+            Levels
+        </th>
+        <th>
+            Descriptions
+        </th>
+    </tr>
+    <tr>
+        <td>L1</td>
+        <td>Discussion and tasks are a conversational level with minimal support for word finding and organization. Class moves quickly.</td>
+    </tr>
+    <tr>
+        <td>L2</td>
+        <td>Discussion and tasks are at a single sentence level with moderate support for talking and listening. Class is moderately paced with occasional repetition.</td>
+    </tr>
+    <tr>
+        <td>L3</td>
+        <td>Discussion and tasks are at a single word level with significant support for talking and listening. Class moves at a slower pace with frequent repetition.</td>
+    </tr>
+    <tr>
+        <td>L4</td>
+        <td>Discussion and tasks encourage use of talking, pointing, drawing, and gesturing with maximal support. Class moves slowly with consistent repetition.</td>
+    </tr>
+    <tr>
+        <td>All Levels</td>
+        <td>These groups accommodate members of all communication abilities.</td>
+    </tr>
+    <tr>
+        <td>Fitness Group</td>
+        <td>These innovative groups combine cardio and resistance training</td>
+    </tr>
+</table>
+
+

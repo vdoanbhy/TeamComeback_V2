@@ -24,6 +24,7 @@ namespace TeamComeback_V2.Models
         [Display(Name = "Instructor Name")]
         public string InstructorName { get; set; }
         public double Cost { get; set; }
+        public string Description { get; set; }
         public virtual ICollection<Registar> Registars { get; set; }
     }
 }

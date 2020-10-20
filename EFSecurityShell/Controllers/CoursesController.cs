@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TeamComeback_V2.Data;
@@ -17,15 +16,39 @@ namespace TeamComeback_V2.Controllers
         private TeamComeback_V2Context db = new TeamComeback_V2Context();
 
         // GET: Courses
-        public ActionResult Index(string search)
+        public ActionResult Index(string search, string year, string sortBy)
         {
             var courses = from c in db.Courses
-                           select c;
+                          select c;
             if (!String.IsNullOrEmpty(search))
             {
-                courses = courses.Where(s => s.Name.Contains(search));
+                courses = courses.Where(s => s.Name.Contains(search) ||
+                s.InstructorName.Contains(search) ||
+                s.Year.Contains(search));
                 ViewBag.Search = search;
             }
+
+            var orderedYear = courses.OrderBy(p => p.Year).Select(p =>
+                p.Year).Distinct();
+
+            if (!String.IsNullOrEmpty(year))
+            {
+                courses = courses.Where(s => s.Year.Contains(year));
+            }
+
+            switch (sortBy)
+            {
+                case "cost_lowest":
+                    courses = courses.OrderBy(p => p.Cost);
+                    break;
+                case "cost_highest":
+                    courses = courses.OrderByDescending(p => p.Cost);
+                    break;
+                default:
+                    break;
+            }
+
+            ViewBag.Year = new SelectList(orderedYear);
             return View(courses.ToList());
         }
 
@@ -55,7 +78,7 @@ namespace TeamComeback_V2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CourseID,Name,Terms,Year,Day,Time,InstructorName,Cost")] Course course)
+        public ActionResult Create([Bind(Include = "CourseID,Name,Terms,Year,Day,Time,InstructorName,Cost,Description")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +110,7 @@ namespace TeamComeback_V2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CourseID,Name,Terms,Year,Day,Time,InstructorName,Cost")] Course course)
+        public ActionResult Edit([Bind(Include = "CourseID,Name,Terms,Year,Day,Time,InstructorName,Cost,Description")] Course course)
         {
             if (ModelState.IsValid)
             {
