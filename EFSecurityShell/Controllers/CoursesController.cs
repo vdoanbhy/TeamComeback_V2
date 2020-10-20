@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -8,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using TeamComeback_V2.Data;
 using TeamComeback_V2.Models;
+using TeamComeback_V2.ViewModels;
 
 namespace TeamComeback_V2.Controllers
 {
@@ -16,8 +18,9 @@ namespace TeamComeback_V2.Controllers
         private TeamComeback_V2Context db = new TeamComeback_V2Context();
 
         // GET: Courses
-        public ActionResult Index(string search, string year, string sortBy)
+        public ActionResult Index(string search, string year, string sortBy, int? page)
         {
+            CourseIndexViewModel viewModel = new CourseIndexViewModel();
             var courses = from c in db.Courses
                           select c;
             if (!String.IsNullOrEmpty(search))
@@ -25,7 +28,7 @@ namespace TeamComeback_V2.Controllers
                 courses = courses.Where(s => s.Name.Contains(search) ||
                 s.InstructorName.Contains(search) ||
                 s.Year.Contains(search));
-                ViewBag.Search = search;
+                viewModel.Search = search;
             }
 
             var orderedYear = courses.OrderBy(p => p.Year).Select(p =>
@@ -45,11 +48,24 @@ namespace TeamComeback_V2.Controllers
                     courses = courses.OrderByDescending(p => p.Cost);
                     break;
                 default:
+                    courses = courses.OrderBy(p => p.Name);
                     break;
             }
 
+            const int PageItems = 3;
+            int currentPage = (page ?? 1);
+            viewModel.Courses = courses.ToPagedList(currentPage, PageItems);
+            viewModel.SortBy = sortBy;
+
+            viewModel.Sorts = new Dictionary<string, string>
+            {
+                {"Cost low to high", "cost_lowest" },
+                {"Cost high to low", "cost_highest" }
+            };
+
             ViewBag.Year = new SelectList(orderedYear);
-            return View(courses.ToList());
+            
+            return View(viewModel);
         }
 
         // GET: Courses/Details/5

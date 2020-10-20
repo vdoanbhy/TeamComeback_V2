@@ -16,8 +16,11 @@ namespace TeamComeback_V2.Controllers
 
         public ActionResult About()
         {
+            //int val1 = 42;
+            //int val2 = 0;
+            //int val3 = val1 / val2;
             ViewBag.Message = "Your application description page.";
-
+            //return View(val3);
             return View();
         }
 
