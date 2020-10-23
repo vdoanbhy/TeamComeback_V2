@@ -13,15 +13,29 @@ namespace TeamComeback_V2.Controllers
             return View();
         }
 
+        [PartialCache("1MinuteCache")]
+        [ChildActionOnly]
+        public PartialViewResult PartialIndexView()
+        {
+            return PartialView();
+        }
 
         public ActionResult About()
         {
             //int val1 = 42;
             //int val2 = 0;
             //int val3 = val1 / val2;
-            ViewBag.Message = "Your application description page.";
+
             //return View(val3);
+            ViewBag.message = "your application description page.";
             return View();
+        }
+
+        [PartialCache("1MinuteCache")]
+        [ChildActionOnly]
+        public PartialViewResult PartialAboutView()
+        {
+            return PartialView();
         }
 
         public ActionResult Contact()
@@ -29,6 +43,13 @@ namespace TeamComeback_V2.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [PartialCache("1MinuteCache")]
+        [ChildActionOnly]
+        public PartialViewResult PartialContactView()
+        {
+            return PartialView();
         }
     }
 }
