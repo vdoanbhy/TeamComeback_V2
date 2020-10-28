@@ -198,6 +198,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="Controllers\RegistarsController.cs" />
     <Compile Include="PartialCacheAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -241,7 +242,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Registar.cs" />
-    <Compile Include="Models\RegistarsController.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\TeamComebackDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -380,11 +380,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Feedback\Create.cshtml" />
     <Content Include="Views\Feedback\Index.cshtml" />
-    <Content Include="Views\Registars\Create.cshtml" />
-    <Content Include="Views\Registars\Delete.cshtml" />
-    <Content Include="Views\Registars\Details.cshtml" />
-    <Content Include="Views\Registars\Edit.cshtml" />
-    <Content Include="Views\Registars\Index.cshtml" />
     <Content Include="Views\Members\Create.cshtml" />
     <Content Include="Views\Members\Delete.cshtml" />
     <Content Include="Views\Members\Details.cshtml" />
@@ -398,6 +393,11 @@
     <Content Include="Views\Home\PartialAboutView.cshtml" />
     <Content Include="Views\Home\PartialIndexView.cshtml" />
     <Content Include="Views\Home\PartialContactView.cshtml" />
+    <Content Include="Views\Registars\Create.cshtml" />
+    <Content Include="Views\Registars\Delete.cshtml" />
+    <Content Include="Views\Registars\Details.cshtml" />
+    <Content Include="Views\Registars\Edit.cshtml" />
+    <Content Include="Views\Registars\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,8 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TeamComeback_V2.Data;
+using TeamComeback_V2.Models;
 
-namespace TeamComeback_V2.Models
+namespace TeamComeback_V2.Controllers
 {
     public class RegistarsController : Controller
     {
@@ -49,7 +50,7 @@ namespace TeamComeback_V2.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RegistarID,MemberID,CourseID")] Registar registar)
+        public ActionResult Create([Bind(Include = "RegistarID,MemberID,CourseID,Attendance,EnrollmentDate")] Registar registar)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +86,7 @@ namespace TeamComeback_V2.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RegistarID,MemberID,CourseID")] Registar registar)
+        public ActionResult Edit([Bind(Include = "RegistarID,MemberID,CourseID,Attendance,EnrollmentDate")] Registar registar)
         {
             if (ModelState.IsValid)
             {
