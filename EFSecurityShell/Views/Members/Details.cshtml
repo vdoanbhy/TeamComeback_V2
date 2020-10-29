@@ -7,7 +7,7 @@
 <h2>Memeber's Details</h2>
 
 <div>
-    
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -91,6 +91,59 @@
         </dd>
 
     </dl>
+    <h3>Current Enrollments: </h3>
+    <table class="table">
+        <tr>
+            <th>
+                Course Title
+            </th>
+            <th>
+                Session
+            </th>
+            <th>
+                Day
+            </th>
+            <th>
+                Time
+            </th>
+            <th>
+                Enrollment Date
+            </th>
+            <th>
+                Attedance
+            </th>
+            <th>
+                Cost
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Registars)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Session.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Day)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnrollmentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attendance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Cost)
+        </td>
+    </tr>
+        }
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

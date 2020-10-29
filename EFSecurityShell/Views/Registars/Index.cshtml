@@ -1,53 +1,91 @@
-﻿@model IEnumerable<TeamComeback_V2.Models.Registar>
-
+﻿@model TeamComeback_V2.ViewModels.EnrollmentIndexViewModel
+@using PagedList.Mvc
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Enrollments";
 }
 
-<h2>Enrollments</h2>
-
+<h2>@ViewBag.Title</h2>
+<p>
+    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Registars.TotalItemCount enrollments
+</p>
 <p>
     @Html.ActionLink("Enroll in a Course", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Registars", FormMethod.Get))
+{
+
+    @Html.TextBox("Search", null, new { @placeholder = "Search Enrollments" })
+    <button type="submit" class="btn btn-sm">Submit</button>
+    <input type="hidden" name="Search" id="Search" value="@Model.Search" />
+
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Course.Name)
+            @Html.DisplayNameFor(model => model.Registars.First().Course)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Member.LastName)
+            @Html.DisplayNameFor(model => model.Course)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
+            @Html.DisplayNameFor(model => model.Member)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Attendance)
+            @Html.DisplayNameFor(model => model.Registars.First().MemberID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registars.First().EnrollmentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registars.First().Attendance)
         </th>
 
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Course.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Member.LastName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.EnrollmentDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Attendance)
-    </td>
+    @foreach (var item in Model.Registars)
+    {
+        <tr>
 
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.RegistarID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.RegistarID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.RegistarID })
-    </td>
-</tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnrollmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attendance)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RegistarID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RegistarID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RegistarID })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div>
+    Page @(Model.Registars.PageCount < Model.Registars.PageNumber ? 0 :
+        Model.Registars.PageNumber) of @Model.Registars.PageCount
+        @Html.PagedListPager(Model.Registars, page => Url.Action("Index",
+            new
+                {
+                    
+                  Search = @Model.Search,
+                
+    page
+                }))
+    </div>

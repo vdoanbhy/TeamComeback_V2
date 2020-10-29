@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -8,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using TeamComeback_V2.Data;
 using TeamComeback_V2.Models;
+using TeamComeback_V2.ViewModels;
 
 namespace TeamComeback_V2.Controllers
 {
@@ -16,10 +18,23 @@ namespace TeamComeback_V2.Controllers
         private TeamComeback_V2Context db = new TeamComeback_V2Context();
 
         // GET: Registars
-        public ActionResult Index()
+        public ActionResult Index(string search, int? page)
         {
+            EnrollmentIndexViewModel viewModel = new EnrollmentIndexViewModel();
             var registars = db.Registars.Include(r => r.Course).Include(r => r.Member);
-            return View(registars.ToList());
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                registars = registars.Where(r => r.Course.Name.Contains(search) ||
+                r.Member.LastName.Contains(search) || r.EnrollmentDate.Contains(search)
+                );
+                ViewBag.Search = search;
+            }
+            registars = registars.OrderBy(p => p.Course.Name);
+            const int PageItems = 3;
+            int currentPage = (page ?? 1);
+            viewModel.Registars = registars.ToPagedList(currentPage, PageItems);
+            return View(viewModel);
         }
 
         // GET: Registars/Details/5

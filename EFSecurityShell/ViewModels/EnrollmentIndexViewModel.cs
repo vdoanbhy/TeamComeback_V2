@@ -16,7 +16,7 @@ namespace TeamComeback_V2.ViewModels
         public string Member { get; set; }
         [Display(Name = "Day")]
         public string Course { get; set; }
-        public int MyProperty { get; set; }
+        public string Session { get; set; }
         public string Search { get; set; }
     }
 }
