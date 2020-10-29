@@ -11,17 +11,18 @@ namespace TeamComeback_V2.Models
     {
         protected override void Seed(TeamComeback_V2Context context)
         {
-            IList<Course> defaultCourses = new List<Course>();
+           
             IList<Member> defaultMembers = new List<Member>();
-            defaultCourses.Add(new Course() { Name = "L1F20M-World Games 1", Terms = Terms.Fall, Year = "2020", Day = DayOfWeek.Monday, Time = "10:00 am - 10:20 am", InstructorName = "John Doe", Cost = 19.99, Description = "Play World Game" });
-            defaultCourses.Add(new Course() { Name = "L1F19-Escape This", Terms = Terms.Fall, Year = "2019", Day = DayOfWeek.Monday, Time = "10:20 am - 10:40 am", InstructorName = "Zoe Doe", Cost = 19.99, Description = "Play World Game" });
-            defaultCourses.Add(new Course() { Name = "L1F19-Presentation Group", Terms = Terms.Fall, Year = "2019", Day = DayOfWeek.Monday, Time = "10:40 am - 10:00 am", InstructorName = "Dave Doe", Cost = 19.99, Description = "Play World Game" });
-            defaultCourses.Add(new Course() { Name = "L2F20-Select Topics 2", Terms = Terms.Fall, Year = "2020", Day = DayOfWeek.Tuesday, Time = "10:00 am - 10:20 am", InstructorName = "Jim Doe", Cost = 25.99, Description = "Play World Game" });
-            defaultCourses.Add(new Course() { Name = "L2S20-Number Crunchers", Terms = Terms.Spring, Year = "2020", Day = DayOfWeek.Tuesday, Time = "10:20 am - 10:40 am", InstructorName = "Joe Doe", Cost = 25.99, Description = "Play World Game" });
-            defaultCourses.Add(new Course() { Name = "ALF18-Slow Road to Better", Terms = Terms.Fall, Year = "2018", Day = DayOfWeek.Tuesday, Time = "10:40 am - 11:00 am", InstructorName = "Amy Doe", Cost = 15.99, Description = "Play World Game" });
+            IList<Session> defaultSessions = new List<Session>();
             defaultMembers.Add(new Member() { LastName = "Doe", FirstName = "Jane", Gender = Gender.Female, DoB = "01/01/1980", Address = "123 abc str", City = "Fairfax", State = State.VA, Zip = 22031, PhoneNumber = "123-123-3213",DateOfLastStroke = "01/01/2016"});
-            context.Courses.AddRange(defaultCourses);
+            defaultMembers.Add(new Member() { LastName = "Smith", FirstName = "John", Gender = Gender.Female, DoB = "01/01/1980", Address = "123 abc str", City = "Fairfax", State = State.VA, Zip = 22031, PhoneNumber = "123-123-3213", DateOfLastStroke = "01/01/2016" });
+            defaultMembers.Add(new Member() { LastName = "Lee", FirstName = "Rose", Gender = Gender.Female, DoB = "01/01/1980", Address = "123 abc str", City = "Fairfax", State = State.VA, Zip = 22031, PhoneNumber = "123-123-3213", DateOfLastStroke = "01/01/2016" });
+            defaultMembers.Add(new Member() { LastName = "Kim", FirstName = "Jennie", Gender = Gender.Female, DoB = "01/01/1980", Address = "123 abc str", City = "Fairfax", State = State.VA, Zip = 22031, PhoneNumber = "123-123-3213", DateOfLastStroke = "01/01/2016" });
+            defaultMembers.Add(new Member() { LastName = "Long", FirstName = "Shane", Gender = Gender.Female, DoB = "01/01/1980", Address = "123 abc str", City = "Fairfax", State = State.VA, Zip = 22031, PhoneNumber = "123-123-3213", DateOfLastStroke = "01/01/2016" });
+            defaultSessions.Add(new Session() {Name="2020-Session 5", DateStart="10/19/2020",DateEnd="12/18/2020" });
+            defaultSessions.Add(new Session() { Name = "2020-Session 4", DateStart = "8/19/2020", DateEnd = "10/18/2020" });
             context.Members.AddRange(defaultMembers);
+            context.Sessions.AddRange(defaultSessions);
             base.Seed(context);
         }
     }

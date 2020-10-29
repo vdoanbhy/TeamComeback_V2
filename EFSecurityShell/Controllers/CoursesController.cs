@@ -18,34 +18,37 @@ namespace TeamComeback_V2.Controllers
         private TeamComeback_V2Context db = new TeamComeback_V2Context();
 
         // GET: Courses
-        public ActionResult Index(string search, string year, string sortBy, int? page)
+        public ActionResult Index(string session, string search, string sortBy, int? page)
         {
             CourseIndexViewModel viewModel = new CourseIndexViewModel();
-            var courses = from c in db.Courses
-                          select c;
+            var courses = db.Courses.Include(c => c.Session);
+            if (!String.IsNullOrEmpty(session))
+            {
+                courses = courses.Where(c => c.Session.Name == session);
+            }
             if (!String.IsNullOrEmpty(search))
             {
-                courses = courses.Where(s => s.Name.Contains(search) ||
-                s.InstructorName.Contains(search) ||
-                s.Year.Contains(search));
-                viewModel.Search = search;
+                courses = courses.Where(c => c.Name.Contains(search) || c.InstructorName.Contains(search) || c.Time.Contains(search)||
+                c.Session.Name.Contains(search));
+                ViewBag.Search = search;
             }
+            var sessions = courses.OrderBy(c => c.Session.Name).Select(c =>
+                c.Session.Name).Distinct();
 
-            var orderedYear = courses.OrderBy(p => p.Year).Select(p =>
-                p.Year).Distinct();
-
-            if (!String.IsNullOrEmpty(year))
+            if (!String.IsNullOrEmpty(session))
             {
-                courses = courses.Where(s => s.Year.Contains(year));
+                courses = courses.Where(p => p.Session.Name == session);
+                viewModel.Session = session;
             }
+            ViewBag.Session = new SelectList(sessions);
 
             switch (sortBy)
             {
                 case "cost_lowest":
-                    courses = courses.OrderBy(p => p.Cost);
+                    courses = courses.OrderBy(c => c.Cost);
                     break;
                 case "cost_highest":
-                    courses = courses.OrderByDescending(p => p.Cost);
+                    courses = courses.OrderByDescending(c => c.Cost);
                     break;
                 default:
                     courses = courses.OrderBy(p => p.Name);
@@ -56,15 +59,12 @@ namespace TeamComeback_V2.Controllers
             int currentPage = (page ?? 1);
             viewModel.Courses = courses.ToPagedList(currentPage, PageItems);
             viewModel.SortBy = sortBy;
-
             viewModel.Sorts = new Dictionary<string, string>
             {
                 {"Cost low to high", "cost_lowest" },
                 {"Cost high to low", "cost_highest" }
             };
 
-            ViewBag.Year = new SelectList(orderedYear);
-            
             return View(viewModel);
         }
 
@@ -86,6 +86,7 @@ namespace TeamComeback_V2.Controllers
         // GET: Courses/Create
         public ActionResult Create()
         {
+            ViewBag.SessionID = new SelectList(db.Sessions, "ID", "Name");
             return View();
         }
 
@@ -94,7 +95,7 @@ namespace TeamComeback_V2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CourseID,Name,Terms,Year,Day,Time,InstructorName,Cost,Description")] Course course)
+        public ActionResult Create([Bind(Include = "CourseID,Name,Day,Time,InstructorName,Cost,Description,SessionID")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -103,6 +104,7 @@ namespace TeamComeback_V2.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.SessionID = new SelectList(db.Sessions, "ID", "Name", course.SessionID);
             return View(course);
         }
 
@@ -118,6 +120,7 @@ namespace TeamComeback_V2.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SessionID = new SelectList(db.Sessions, "ID", "Name", course.SessionID);
             return View(course);
         }
 
@@ -126,7 +129,7 @@ namespace TeamComeback_V2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CourseID,Name,Terms,Year,Day,Time,InstructorName,Cost,Description")] Course course)
+        public ActionResult Edit([Bind(Include = "CourseID,Name,Day,Time,InstructorName,Cost,Description,SessionID")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -134,6 +137,7 @@ namespace TeamComeback_V2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.SessionID = new SelectList(db.Sessions, "ID", "Name", course.SessionID);
             return View(course);
         }
 

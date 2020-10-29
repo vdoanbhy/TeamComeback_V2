@@ -1,0 +1,66 @@
+﻿@model TeamComeback_V2.ViewModels.SessionsIndexViewModel
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Sessions";
+}
+
+<h2>@ViewBag.Title</h2>
+<p>
+@(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Sessions.TotalItemCount sessions
+</p>
+<p>
+    @Html.ActionLink("Create A New Session", "Create")
+</p>
+@using (Html.BeginForm("Index", "Sessions", FormMethod.Get))
+{
+    @Html.TextBox("Search", null, new { @placeholder = "Search Sessions" })
+    <button type="submit" class="btn btn-sm">Submit</button>
+    <input type="hidden" name="Search" id="Search" value="@Model.Search" />
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Sessions.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sessions.First().DateStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sessions.First().DateEnd)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Sessions)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEnd)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    Page @(Model.Sessions.PageCount < Model.Sessions.PageNumber ? 0 :
+        Model.Sessions.PageNumber) of @Model.Sessions.PageCount
+        @Html.PagedListPager(Model.Sessions, page => Url.Action("Index",
+            new
+                {
+                  Search = @Model.Search,
+                  page
+                }))
+    </div>

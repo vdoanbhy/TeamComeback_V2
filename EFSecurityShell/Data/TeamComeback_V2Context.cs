@@ -26,5 +26,7 @@ namespace TeamComeback_V2.Data
         public System.Data.Entity.DbSet<TeamComeback_V2.Models.Registar> Registars { get; set; }
 
         public System.Data.Entity.DbSet<TeamComeback_V2.Models.Member> Members { get; set; }
+
+        public System.Data.Entity.DbSet<TeamComeback_V2.Models.Session> Sessions { get; set; }
     }
 }

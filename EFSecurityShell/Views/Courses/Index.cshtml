@@ -1,137 +1,90 @@
 ﻿@model TeamComeback_V2.ViewModels.CourseIndexViewModel
-@using PagedList.Mvc;
+@using PagedList.Mvc
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Course Offerings";
 }
 
-<h2>Course Offerings</h2>
-
+<h2>@ViewBag.Title</h2>
 <p>
-    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " +
-        Model.Search + " found")  @Model.Courses.TotalItemCount courses
-    </p>
+    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Courses.TotalItemCount courses
+</p>
+<p>
+    @Html.ActionLink("Create A New Course", "Create")
+</p>
+@using (Html.BeginForm("Index", "Courses", FormMethod.Get))
+{
+    <label>Filter by session:</label> @Html.DropDownList("Session", "All")
+    <label>Sort by:</label>
+    @Html.DropDownListFor(vm => vm.SortBy, new SelectList(Model.Sorts, "Value", "Key"), "Default")
+    <input type="submit" value="Filter" />
+    @Html.TextBox("Search", null, new { @placeholder = "Search Courses" })
+    <button type="submit" class="btn btn-sm">Submit</button>
+    <input type="hidden" name="Search" id="Search" value="@Model.Search" />
 
-    <p>
-        @Html.ActionLink("Create New Course", "Create")
-    </p>
-    @using (Html.BeginForm("Index", "Courses", FormMethod.Get))
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Session)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Courses.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Courses.First().Day)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Courses.First().Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Courses.First().InstructorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Courses.First().Cost)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Courses)
     {
-
-        <label>Filter by year:</label> @Html.DropDownList("Year", "All")
-        <label>Sort by:</label>
-        @Html.DropDownListFor(vm => vm.SortBy, new SelectList(Model.Sorts, "Value", "Key"), "Default")
-        <input type="submit" value="Filter" />
-        @Html.TextBox("Search", null, new { @placeholder = "Search" })
-        <button type="submit" class="btn btn-sm">Submit</button>
-        <input type="hidden" name="Search" id="Search" value="@Model.Search" />
-    }
-    <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses.First().Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses.First().Terms)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses.First().Year)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses.First().Day)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses.First().Time)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses.First().InstructorName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses.First().Cost)
-            </th>
-            <th></th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Session.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstructorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CourseID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CourseID })
+            </td>
         </tr>
+    }
 
-        @foreach (var item in Model.Courses)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Terms)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Year)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Day)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InstructorName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cost)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CourseID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CourseID })
-                </td>
-            </tr>
-        }
+</table>
 
-    </table>
-
-    <div>
-        Page @(Model.Courses.PageCount < Model.Courses.PageNumber ? 0 :
+<div>
+    Page @(Model.Courses.PageCount < Model.Courses.PageNumber ? 0 :
         Model.Courses.PageNumber) of @Model.Courses.PageCount
         @Html.PagedListPager(Model.Courses, page => Url.Action("Index",
             new
                 {
-
+                    category = @Model.Session,
                   Search = @Model.Search,
                 sortBy = @Model.SortBy,
     page
                 }))
     </div>
-
-    <table class="table">
-        <tr>
-            <th>
-                Levels
-            </th>
-            <th>
-                Descriptions
-            </th>
-        </tr>
-        <tr>
-            <td>L1</td>
-            <td>Discussion and tasks are a conversational level with minimal support for word finding and organization. Class moves quickly.</td>
-        </tr>
-        <tr>
-            <td>L2</td>
-            <td>Discussion and tasks are at a single sentence level with moderate support for talking and listening. Class is moderately paced with occasional repetition.</td>
-        </tr>
-        <tr>
-            <td>L3</td>
-            <td>Discussion and tasks are at a single word level with significant support for talking and listening. Class moves at a slower pace with frequent repetition.</td>
-        </tr>
-        <tr>
-            <td>L4</td>
-            <td>Discussion and tasks encourage use of talking, pointing, drawing, and gesturing with maximal support. Class moves slowly with consistent repetition.</td>
-        </tr>
-        <tr>
-            <td>All Levels</td>
-            <td>These groups accommodate members of all communication abilities.</td>
-        </tr>
-        <tr>
-            <td>Fitness Group</td>
-            <td>These innovative groups combine cardio and resistance training</td>
-        </tr>
-    </table>
-
-
-
