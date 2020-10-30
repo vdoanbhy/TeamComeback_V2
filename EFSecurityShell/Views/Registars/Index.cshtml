@@ -14,7 +14,8 @@
 
 @using (Html.BeginForm("Index", "Registars", FormMethod.Get))
 {
-
+    <label > Filter by attendance:</label>  @Html.DropDownList("Attendance", "All")
+    <input type="submit" value="Filter" />
     @Html.TextBox("Search", null, new { @placeholder = "Search Enrollments" })
     <button type="submit" class="btn btn-sm">Submit</button>
     <input type="hidden" name="Search" id="Search" value="@Model.Search" />
@@ -22,20 +23,30 @@
 }
 <table class="table">
     <tr>
+
         <th>
             @Html.DisplayNameFor(model => model.Registars.First().Course)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Course)
+            @Html.DisplayNameFor(model => model.Day)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Member)
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Registars.First().MemberID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Registars.First().EnrollmentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateEnd)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Registars.First().Attendance)
@@ -55,6 +66,9 @@
                 @Html.DisplayFor(modelItem => item.Course.Day)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Course.Time)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Member.FirstName)
             </td>
             <td>
@@ -62,6 +76,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EnrollmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Session.DateStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Session.DateEnd)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Attendance)
@@ -83,9 +103,9 @@
         @Html.PagedListPager(Model.Registars, page => Url.Action("Index",
             new
                 {
-                    
+
                   Search = @Model.Search,
-                
+
     page
                 }))
     </div>

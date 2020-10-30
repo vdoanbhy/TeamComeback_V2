@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -8,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using TeamComeback_V2.Data;
 using TeamComeback_V2.Models;
+using TeamComeback_V2.ViewModels;
 
 namespace TeamComeback_V2.Controllers
 {
@@ -16,9 +18,30 @@ namespace TeamComeback_V2.Controllers
         private TeamComeback_V2Context db = new TeamComeback_V2Context();
 
         // GET: Members
-        public ActionResult Index()
+        public ActionResult Index(string search, string gender, int? page)
         {
-            return View(db.Members.ToList());
+            MemberIndexViewModel viewModel = new MemberIndexViewModel();
+            var members = from m in db.Members
+                           select m;
+            if (!String.IsNullOrEmpty(search))
+            {
+                members = members.Where(m => m.FirstName.Contains(search) || m.LastName.Contains(search) || m.DoB.Contains(search) ||
+                m.DateOfLastStroke.Contains(search) || m.Address.Contains(search) || m.City.Contains(search) || m.PhoneNumber.Contains(search) ||
+                m.Zip.ToString().Contains(search) || m.State.ToString().Contains(search)
+                );
+                viewModel.Search = search;
+            }
+            if (!String.IsNullOrEmpty(gender))
+            {
+                members = members.Where(m => m.Gender.ToString() == gender);
+            }
+            var genders = members.Select(m => m.Gender.ToString()).Distinct();
+            ViewBag.Gender = new SelectList(genders);
+            members = members.OrderBy(p => p.LastName);
+            const int PageItems = 3;
+            int currentPage = (page ?? 1);
+            viewModel.Members = members.ToPagedList(currentPage, PageItems); ;
+            return View(viewModel);
         }
 
         // GET: Members/Details/5

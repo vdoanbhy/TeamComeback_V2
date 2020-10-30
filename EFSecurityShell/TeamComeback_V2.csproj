@@ -250,6 +250,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CourseIndexViewModel.cs" />
     <Compile Include="ViewModels\EnrollmentIndexViewModel.cs" />
+    <Compile Include="ViewModels\MemberIndexViewModel.cs" />
     <Compile Include="ViewModels\SessionsIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

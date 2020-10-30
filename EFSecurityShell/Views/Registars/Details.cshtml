@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Course.Name)
+            @Html.DisplayNameFor(model => model.Member.FirstName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Course.Name)
+            @Html.DisplayFor(model => model.Member.FirstName)
         </dd>
 
         <dt>
@@ -25,6 +25,14 @@
         <dd>
             @Html.DisplayFor(model => model.Member.LastName)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.Name)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.EnrollmentDate)
         </dt>
@@ -41,6 +49,54 @@
             @Html.DisplayFor(model => model.Attendance)
         </dd>
     </dl>
+    <table class="table">
+        <tr>
+            <th>
+                Session
+            </th>
+            <th>
+                Day
+            </th>
+            <th>
+                Time
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Instructor Name
+            </th>
+            <th>
+                Cost
+            </th>
+        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Course.Session.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Course.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Course.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Course.Session.DateStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Course.Session.DateEnd)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Course.InstructorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Course.Cost)
+                </td>
+            </tr>
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.RegistarID }) |

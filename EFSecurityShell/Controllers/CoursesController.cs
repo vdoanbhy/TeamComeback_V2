@@ -29,7 +29,7 @@ namespace TeamComeback_V2.Controllers
             if (!String.IsNullOrEmpty(search))
             {
                 courses = courses.Where(c => c.Name.Contains(search) || c.InstructorName.Contains(search) || c.Time.Contains(search)||
-                c.Session.Name.Contains(search));
+                c.Session.Name.Contains(search) || c.Day.ToString().Contains(search));
                 ViewBag.Search = search;
             }
             var sessions = courses.OrderBy(c => c.Session.Name).Select(c =>

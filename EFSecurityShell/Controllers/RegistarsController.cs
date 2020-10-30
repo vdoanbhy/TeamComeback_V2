@@ -18,18 +18,26 @@ namespace TeamComeback_V2.Controllers
         private TeamComeback_V2Context db = new TeamComeback_V2Context();
 
         // GET: Registars
-        public ActionResult Index(string search, int? page)
+        public ActionResult Index(string attendance, string search, int? page)
         {
             EnrollmentIndexViewModel viewModel = new EnrollmentIndexViewModel();
             var registars = db.Registars.Include(r => r.Course).Include(r => r.Member);
 
             if (!String.IsNullOrEmpty(search))
             {
-                registars = registars.Where(r => r.Course.Name.Contains(search) ||
-                r.Member.LastName.Contains(search) || r.EnrollmentDate.Contains(search)
+                registars = registars.Where(r => r.Course.Name.Contains(search) || r.Course.Session.Name.Contains(search) ||
+                r.Member.LastName.Contains(search) || r.EnrollmentDate.Contains(search) || r.Member.FirstName.Contains(search)
+                || r.Course.Time.Contains(search) || r.Course.Session.DateStart.Contains(search) || r.Course.Session.DateEnd.Contains(search)
                 );
                 ViewBag.Search = search;
             }
+            if (!String.IsNullOrEmpty(attendance))
+            {
+                registars = registars.Where(r => r.Attendance.ToString() == attendance);
+            }
+            var attendances = registars.Select(r =>r.Attendance.ToString()).Distinct();
+            ViewBag.Attendance = new SelectList(attendances);
+
             registars = registars.OrderBy(p => p.Course.Name);
             const int PageItems = 3;
             int currentPage = (page ?? 1);

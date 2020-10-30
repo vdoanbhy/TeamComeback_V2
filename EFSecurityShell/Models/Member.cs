@@ -22,6 +22,7 @@ namespace TeamComeback_V2.Models
     public class Member
     {
         public int ID { get; set; }
+        [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [Display(Name = "First Name")]

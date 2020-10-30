@@ -1,87 +1,112 @@
-﻿@model IEnumerable<TeamComeback_V2.Models.Member>
-
+﻿@model TeamComeback_V2.ViewModels.MemberIndexViewModel
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Our Members</h2>
-
+<p>
+    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Members.TotalItemCount members
+</p>
 <p>
     @Html.ActionLink("Register New Member", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Members", FormMethod.Get))
+{
+    <label>Filter by gender:</label> @Html.DropDownList("Gender", "All")
+    <input type="submit" value="Filter" />
+    @Html.TextBox("Search", null, new { @placeholder = "Search Members" })
+    <button type="submit" class="btn btn-sm">Submit</button>
+    <input type="hidden" name="Search" id="Search" value="@Model.Search" />
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.Members.First().LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Members.First().FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            @Html.DisplayNameFor(model => model.Members.First().Gender)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DoB)
+            @Html.DisplayNameFor(model => model.Members.First().DoB)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.Members.First().Address)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City)
+            @Html.DisplayNameFor(model => model.Members.First().City)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.State)
+            @Html.DisplayNameFor(model => model.Members.First().State)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Zip)
+            @Html.DisplayNameFor(model => model.Members.First().Zip)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.DisplayNameFor(model => model.Members.First().PhoneNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateOfLastStroke)
+            @Html.DisplayNameFor(model => model.Members.First().DateOfLastStroke)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DoB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Zip)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfLastStroke)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Members)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfLastStroke)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div>
+    Page @(Model.Members.PageCount < Model.Members.PageNumber ? 0 :
+        Model.Members.PageNumber) of @Model.Members.PageCount
+        @Html.PagedListPager(Model.Members, page => Url.Action("Index",
+            new
+                {
+                  
+                  Search = @Model.Search,
+                
+    page
+                }))
+    </div>
