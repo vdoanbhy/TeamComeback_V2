@@ -144,7 +144,10 @@
     </tr>
         }
     </table>
+    <h3>Your Balance: $@Model.Registars.Sum(i => i.Course.Cost)</h3>
+    <a href="https://stripe.com/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Pay Now</a>
 </div>
+<br />
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
