@@ -65,8 +65,18 @@ namespace TeamComeback_V2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,DateStart,DateEnd")] Session session)
         {
+            Session matchingSession = db.Sessions.Where(s => string.Compare(s.Name, session.Name, true) == 0).FirstOrDefault();
             if (ModelState.IsValid)
             {
+                if (session == null)
+                {
+                    return HttpNotFound();
+                }
+                if (matchingSession != null)
+                {
+                    ModelState.AddModelError("Name", "Session must have unique name.");
+                    return View(session);
+                }
                 db.Sessions.Add(session);
                 db.SaveChanges();
                 return RedirectToAction("Index");

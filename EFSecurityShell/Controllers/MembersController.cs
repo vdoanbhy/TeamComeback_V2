@@ -72,8 +72,18 @@ namespace TeamComeback_V2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Gender,DoB,Address,City,State,Zip,PhoneNumber,DateOfLastStroke")] Member member)
         {
+            Member matchingMember = db.Members.Where(m => string.Compare(m.PhoneNumber, member.PhoneNumber, true)==0).FirstOrDefault();
             if (ModelState.IsValid)
             {
+                if (member == null)
+                {
+                    return HttpNotFound();
+                }
+                if (matchingMember != null)
+                {
+                    ModelState.AddModelError("PhoneNumber", "Member must have unique phone number.");
+                    return View(member);
+                }
                 db.Members.Add(member);
                 db.SaveChanges();
                 return RedirectToAction("Index");
