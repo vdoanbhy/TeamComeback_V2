@@ -14,10 +14,12 @@ namespace TeamComeback_V2.Models
         public string Name { get; set; }
         [Required]
         [Display(Name = "Start Date")]
-        public string DateStart { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateStart { get; set; }
         [Required]
         [Display(Name = "End Date")]
-        public string DateEnd { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateEnd { get; set; }
         public virtual ICollection<Course> Courses { get; set; }
     }
 }

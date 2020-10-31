@@ -35,7 +35,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.EnrollmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.EnrollmentDate, new { htmlAttributes = new { @class = "form-control enrolDatePicker" } })
+            @Html.EditorFor(model => model.EnrollmentDate, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -62,13 +62,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-
 @section Scripts {
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script src="~/Scripts/Calendar.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }

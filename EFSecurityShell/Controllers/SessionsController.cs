@@ -26,8 +26,8 @@ namespace TeamComeback_V2.Controllers
             if (!String.IsNullOrEmpty(search))
             {
                 sessions = sessions.Where(s => s.Name.Contains(search) ||
-                s.DateStart.Contains(search) ||
-                s.DateEnd.Contains(search));
+                s.DateStart.ToString().Contains(search) ||
+                s.DateEnd.ToString().Contains(search));
                 viewModel.Search = search;
             }
             sessions = sessions.OrderBy(p => p.Name);

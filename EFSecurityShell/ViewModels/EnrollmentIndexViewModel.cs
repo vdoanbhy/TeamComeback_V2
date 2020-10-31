@@ -18,10 +18,10 @@ namespace TeamComeback_V2.ViewModels
         public string Time { get; set; }
         public string Session { get; set; }
         [Display(Name = "Start Date")]
-        public string DateStart { get; set; }
+        public DateTime DateStart { get; set; }
         [Required]
         [Display(Name = "End Date")]
-        public string DateEnd { get; set; }
+        public DateTime DateEnd { get; set; }
         public string Search { get; set; }
     }
 }

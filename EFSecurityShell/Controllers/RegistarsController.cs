@@ -26,8 +26,8 @@ namespace TeamComeback_V2.Controllers
             if (!String.IsNullOrEmpty(search))
             {
                 registars = registars.Where(r => r.Course.Name.Contains(search) || r.Course.Session.Name.Contains(search) ||
-                r.Member.LastName.Contains(search) || r.EnrollmentDate.Contains(search) || r.Member.FirstName.Contains(search)
-                || r.Course.Time.Contains(search) || r.Course.Session.DateStart.Contains(search) || r.Course.Session.DateEnd.Contains(search)
+                r.Member.LastName.Contains(search) || r.EnrollmentDate.ToString().Contains(search) || r.Member.FirstName.Contains(search)
+                || r.Course.Time.Contains(search) || r.Course.Session.DateStart.ToString().Contains(search) || r.Course.Session.DateEnd.ToString().Contains(search)
                 );
                 ViewBag.Search = search;
             }

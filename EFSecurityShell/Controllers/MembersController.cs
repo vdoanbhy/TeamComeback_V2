@@ -25,8 +25,8 @@ namespace TeamComeback_V2.Controllers
                            select m;
             if (!String.IsNullOrEmpty(search))
             {
-                members = members.Where(m => m.FirstName.Contains(search) || m.LastName.Contains(search) || m.DoB.Contains(search) ||
-                m.DateOfLastStroke.Contains(search) || m.Address.Contains(search) || m.City.Contains(search) || m.PhoneNumber.Contains(search) ||
+                members = members.Where(m => m.FirstName.Contains(search) || m.LastName.Contains(search) || m.DoB.ToString().Contains(search) ||
+                m.DateOfLastStroke.ToString().Contains(search) || m.Address.Contains(search) || m.City.Contains(search) || m.PhoneNumber.Contains(search) ||
                 m.Zip.ToString().Contains(search) || m.State.ToString().Contains(search)
                 );
                 viewModel.Search = search;

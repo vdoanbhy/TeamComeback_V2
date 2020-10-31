@@ -23,7 +23,8 @@ namespace TeamComeback_V2.Models
         public Attendance? Attendance { get; set; }
         [Display(Name = "Enrollment Date")]
         [Required]
-        public string EnrollmentDate { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime EnrollmentDate { get; set; }
         public virtual Member Member { get; set; }
         public virtual Course Course { get; set; }
     }

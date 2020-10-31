@@ -14,13 +14,13 @@ namespace TeamComeback_V2.Models
            
             IList<Member> defaultMembers = new List<Member>();
             IList<Session> defaultSessions = new List<Session>();
-            defaultMembers.Add(new Member() { LastName = "Doe", FirstName = "Jane", Gender = Gender.Female, DoB = "01/01/1980", Address = "123 abc str", City = "Fairfax", State = State.VA, Zip = 22031, PhoneNumber = "123-123-3213",DateOfLastStroke = "01/01/2013"});
-            defaultMembers.Add(new Member() { LastName = "Smith", FirstName = "John", Gender = Gender.Male, DoB = "02/01/1981", Address = "456 ert str", City = "Annadale", State = State.VA, Zip = 22021, PhoneNumber = "123-123-3213", DateOfLastStroke = "01/01/2017" });
-            defaultMembers.Add(new Member() { LastName = "Lee", FirstName = "Rose", Gender = Gender.Female, DoB = "03/01/1987", Address = "345 hfg str", City = "Falls Church", State = State.VA, Zip = 22034, PhoneNumber = "123-123-3213", DateOfLastStroke = "01/01/2019" });
-            defaultMembers.Add(new Member() { LastName = "Kim", FirstName = "Jennie", Gender = Gender.Female, DoB = "04/01/1978", Address = "123 fsd str", City = "Springfield", State = State.VA, Zip = 22036, PhoneNumber = "123-123-3213", DateOfLastStroke = "01/01/2020" });
-            defaultMembers.Add(new Member() { LastName = "Long", FirstName = "Shane", Gender = Gender.Male, DoB = "05/01/1983", Address = "348 asd str", City = "Fairfax", State = State.VA, Zip = 22035, PhoneNumber = "123-123-3213", DateOfLastStroke = "01/01/2012" });
-            defaultSessions.Add(new Session() {Name="2020-Session 5", DateStart="10/19/2020",DateEnd="12/18/2020" });
-            defaultSessions.Add(new Session() { Name = "2020-Session 4", DateStart = "8/19/2020", DateEnd = "10/18/2020" });
+            defaultMembers.Add(new Member() { LastName = "Doe", FirstName = "Jane", Gender = Gender.Female, DoB = new DateTime(1982, 1, 1), Address = "123 abc str", City = "Fairfax", State = State.VA, Zip = 22031, PhoneNumber = "123-423-3213",DateOfLastStroke = new DateTime(2013, 1, 1) });
+            defaultMembers.Add(new Member() { LastName = "Smith", FirstName = "John", Gender = Gender.Male, DoB = new DateTime(1981, 2, 1), Address = "456 ert str", City = "Annadale", State = State.VA, Zip = 22021, PhoneNumber = "123-456-3213", DateOfLastStroke = new DateTime(2017, 1, 1) });
+            defaultMembers.Add(new Member() { LastName = "Lee", FirstName = "Rose", Gender = Gender.Female, DoB = new DateTime(1987, 3, 1), Address = "345 hfg str", City = "Falls Church", State = State.VA, Zip = 22034, PhoneNumber = "345-123-3213", DateOfLastStroke = new DateTime(2019, 1, 1) });
+            defaultMembers.Add(new Member() { LastName = "Kim", FirstName = "Jennie", Gender = Gender.Female, DoB = new DateTime(1978, 4, 1), Address = "123 fsd str", City = "Springfield", State = State.VA, Zip = 22036, PhoneNumber = "678-123-3213", DateOfLastStroke = new DateTime(2020, 1, 1) });
+            defaultMembers.Add(new Member() { LastName = "Long", FirstName = "Shane", Gender = Gender.Male, DoB = new DateTime(1983, 5, 1), Address = "348 asd str", City = "Fairfax", State = State.VA, Zip = 22035, PhoneNumber = "703-123-3213", DateOfLastStroke = new DateTime(2012, 1, 1) });
+            defaultSessions.Add(new Session() {Name="2020-Session 5", DateStart= new DateTime(2020, 10, 19), DateEnd= new DateTime(2020, 12, 18)});
+            defaultSessions.Add(new Session() { Name = "2020-Session 4", DateStart = new DateTime(2020, 8, 19), DateEnd = new DateTime(2020, 10, 18) });
             context.Members.AddRange(defaultMembers);
             context.Sessions.AddRange(defaultSessions);
             base.Seed(context);

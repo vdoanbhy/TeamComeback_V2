@@ -29,7 +29,9 @@ namespace TeamComeback_V2.Models
         public string FirstName { get; set; }
         public Gender? Gender { get; set; }
         [Required]
-        public string DoB { get; set; }
+        [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DoB { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public State? State { get; set; }
@@ -40,7 +42,8 @@ namespace TeamComeback_V2.Models
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string PhoneNumber { get; set; }
         [Display(Name = "Date of Last Stroke")]
-        public string DateOfLastStroke { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfLastStroke { get; set; }
         public virtual ICollection<Registar> Registars { get; set; }
     }
 }
