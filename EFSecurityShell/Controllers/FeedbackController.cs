@@ -9,7 +9,6 @@ using TeamComeback_V2.Models;
 
 namespace TeamComeback_V2.Controllers
 {
-    
     public class FeedbackController : Controller
     {
         ApplicationDbContext context;
@@ -22,7 +21,6 @@ namespace TeamComeback_V2.Controllers
         {
             return View(context.Feedbacks.ToList());
         }
-        
         public ActionResult Create()
         {
             FeedbackViewModel model = new FeedbackViewModel();

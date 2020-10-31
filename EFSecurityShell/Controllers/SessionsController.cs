@@ -13,6 +13,7 @@ using TeamComeback_V2.ViewModels;
 
 namespace TeamComeback_V2.Controllers
 {
+    [Authorize]
     public class SessionsController : Controller
     {
         private TeamComeback_V2Context db = new TeamComeback_V2Context();
