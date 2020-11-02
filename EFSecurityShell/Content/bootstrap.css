@@ -6143,7 +6143,8 @@ a.badge:focus {
     padding-top: 30px;
     padding-bottom: 30px;
     color: inherit;
-    background-color: lightblue;
+    background: rgb(118,191,223);
+    background: linear-gradient(180deg, rgba(118,191,223,1) 0%, rgba(255,255,255,1) 62%);
 }
 
     .jumbotron h1,
