@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Roles";
 }
-
 <h2>@ViewBag.Title</h2>
 <p>
     <a href="/TeamComeback_V2/RolesAdmin/Create/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add</a>
@@ -23,9 +22,9 @@
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Name)</td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) <span class="glyphicon glyphicon-list" aria-hidden="true"></span> |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm fa fa-edit" })
+                @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-sm fa fa-list" })
+                @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm fa fa-trash" })
             </td>
         </tr>
     }

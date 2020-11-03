@@ -14,10 +14,10 @@
 </p>
 @using (Html.BeginForm("Index", "Sessions", FormMethod.Get))
 {
-    <label>Search: </label>
-    @Html.TextBox("Search", null, new { @placeholder = "..." })
+    @Html.TextBox("Search", null, new { @placeholder = "Search Session" }) <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
     <input type="hidden" name="Search" id="Search" value="@Model.Search" />
 }
+<br/>
 <table class="table">
     <tr>
         <th>
@@ -45,9 +45,9 @@
                 @Html.DisplayFor(modelItem => item.DateEnd)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) <span class="glyphicon glyphicon-list" aria-hidden="true"></span> |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID }) <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "btn btn-warning fa fa-edit" })
+                @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-info fa fa-list" })
+                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-danger fa fa-trash" })
             </td>
         </tr>
     }

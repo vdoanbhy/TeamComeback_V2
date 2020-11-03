@@ -3,10 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using TeamComeback_V2.Data;
 using TeamComeback_V2.Models;
 using TeamComeback_V2.ViewModels;
@@ -158,5 +161,66 @@ namespace TeamComeback_V2.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public void ExportToCSV()
+        {
+            List<Member> memberList = db.Members.ToList<Member>();
+            StringWriter sw = new StringWriter();
+            sw.WriteLine("\"LastName\",\"FirstName\",\"Gender\",\"DoB\",\"Address\",\"City\",\"State\",\"Zip\",\"PhoneNumber\",\"DateOfLastStroke\"");
+            Response.ClearContent();
+            Response.AddHeader("content-disposition","attachment;filename=ExportedMemberList.csv");
+            Response.ContentType = "text/csv";
+            
+            foreach (var item in memberList)
+            {
+                sw.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\"",
+                    item.LastName,
+                    item.FirstName,
+                    item.Gender,
+                    item.DoB,
+                    item.Address,
+                    item.City,
+                    item.State,
+                    item.Zip,
+                    item.PhoneNumber,
+                    item.DateOfLastStroke)
+                    );
+            }
+            Response.Write(sw.ToString());
+            Response.End();
+        }
+
+        public void ExportToExcel()
+        {
+            List<Member> memberList = db.Members.ToList<Member>();
+            var grid = new GridView();
+            grid.DataSource = from item in memberList
+                              select new
+                              {
+                                  LastName = item.LastName,
+                                  FirstName = item.FirstName,
+                                  Gender = item.Gender,
+                                  DoB = item.DoB,
+                                  Address = item.Address,
+                                  City = item.City,
+                                  State = item.State,
+                                  Zip = item.Zip,
+                                  PhoneNumber = item.PhoneNumber,
+                                  DateOfLastStroke = item.DateOfLastStroke
+                              };
+            grid.DataBind();
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment; filename=ExportedMemberList.xls");
+            Response.ContentType = "application/excel";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
+
+            grid.RenderControl(htmlTextWriter);
+            Response.Write(sw.ToString());
+            Response.End();
+
+        }
+
+
     }
 }
