@@ -258,6 +258,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\chevron-up.svg" />
     <Content Include="Content\images\contact-us.png" />
     <Content Include="Content\images\donate-now.png" />
     <Content Include="Content\images\facebook.png" />
@@ -285,6 +286,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="elegantfeedback\images\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\scroll.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

@@ -42,18 +42,43 @@ textarea {
     }
 }
 
-    .socialMedia {
-        padding-top: 2px;
-        height: 41px;
-        width: 40px;
-        align-items: center;
-    }
+.socialMedia {
+    padding-top: 2px;
+    height: 41px;
+    width: 40px;
+    align-items: center;
+}
 
-    .instagram {
-        margin-top: 4px;
-        height: 34px;
-        width: 35px;
-        border: 2px solid white;
-        border-radius: 2px;
-    }
+.instagram {
+    margin-top: 4px;
+    height: 34px;
+    width: 35px;
+    border: 2px solid white;
+    border-radius: 2px;
+}
 
+.to-top {
+    background-color: #e9ecef;
+    position: fixed;
+    bottom: 50px;
+    right: 32px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .4s;
+}
+
+.to-top.active {
+    bottom: 50px;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+html {
+    scroll-behavior: smooth;
+}
