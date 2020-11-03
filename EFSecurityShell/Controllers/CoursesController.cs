@@ -56,7 +56,7 @@ namespace TeamComeback_V2.Controllers
                     break;
             }
 
-            const int PageItems = 3;
+            const int PageItems = 10;
             int currentPage = (page ?? 1);
             viewModel.Courses = courses.ToPagedList(currentPage, PageItems);
             viewModel.SortBy = sortBy;

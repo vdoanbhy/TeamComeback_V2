@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -38,6 +39,39 @@ namespace TeamComeback_V2.Controllers
             }
             model.Answers = Common.GetAnswers();
             return View(model);
+        }
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Feedback feedback = context.Feedbacks.Find(id);
+            if (feedback == null)
+            {
+                return HttpNotFound();
+            }
+            return View(feedback);
+        }
+
+        // POST: Courses/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Feedback feedback = context.Feedbacks.Find(id);
+            context.Feedbacks.Remove(feedback);
+            context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                context.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

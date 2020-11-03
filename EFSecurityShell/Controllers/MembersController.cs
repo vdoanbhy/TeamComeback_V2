@@ -39,7 +39,7 @@ namespace TeamComeback_V2.Controllers
             var genders = members.Select(m => m.Gender.ToString()).Distinct();
             ViewBag.Gender = new SelectList(genders);
             members = members.OrderBy(p => p.LastName);
-            const int PageItems = 3;
+            const int PageItems = 10;
             int currentPage = (page ?? 1);
             viewModel.Members = members.ToPagedList(currentPage, PageItems); ;
             return View(viewModel);

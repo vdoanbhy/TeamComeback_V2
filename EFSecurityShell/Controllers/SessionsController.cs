@@ -32,7 +32,7 @@ namespace TeamComeback_V2.Controllers
                 viewModel.Search = search;
             }
             sessions = sessions.OrderBy(p => p.Name);
-            const int PageItems = 3;
+            const int PageItems = 5;
             int currentPage = (page ?? 1);
             viewModel.Sessions = sessions.ToPagedList(currentPage, PageItems);
             return View(viewModel);

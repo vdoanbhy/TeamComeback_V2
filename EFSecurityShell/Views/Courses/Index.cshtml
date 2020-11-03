@@ -6,23 +6,23 @@
 
 <h2>@ViewBag.Title</h2>
 <p>
-    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Courses.TotalItemCount courses
+    <a href="/TeamComeback_V2/Courses/Create/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Course</a>
 </p>
 <p>
-    @Html.ActionLink("Create A New Course", "Create")
+    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Courses.TotalItemCount courses
 </p>
 @using (Html.BeginForm("Index", "Courses", FormMethod.Get))
 {
-    <label>Filter by session:</label> @Html.DropDownList("Session", "All")
-    <label>Sort by:</label>
-    @Html.DropDownListFor(vm => vm.SortBy, new SelectList(Model.Sorts, "Value", "Key"), "Default")
-    <input type="submit" value="Filter" />
-    @Html.TextBox("Search", null, new { @placeholder = "Search Courses" })
-    <button type="submit" class="btn btn-sm">Submit</button>
+    @Html.TextBox("Search", null, new { @placeholder = "Search Course" }) <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+    <div class="right">
+        <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> @Html.DropDownList("Session", "All")
+        <span class="glyphicon glyphicon-sort" aria-hidden="true"></span> @Html.DropDownListFor(vm => vm.SortBy, new SelectList(Model.Sorts, "Value", "Key"), "Default")
+        <input type="submit" class="btn btn-sm btn-primary" value="Filter" />
+    </div>
     <input type="hidden" name="Search" id="Search" value="@Model.Search" />
 
 }
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Session)
@@ -67,9 +67,9 @@
                 @Html.DisplayFor(modelItem => item.Cost)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.CourseID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CourseID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> |
+                @Html.ActionLink("Details", "Details", new { id = item.CourseID }) <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CourseID }) <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </td>
         </tr>
     }
@@ -88,3 +88,33 @@
     page
                 }))
     </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Course Levels</th>
+            <th>Descriptions</th>
+        </tr>
+        <tr>
+            <td>Level 1 - L1</td>
+            <td>Discussion and tasks are a conversational level with minimal support for word finding and organization. Class moves quickly.</td>
+        </tr>
+        <tr>
+            <td>Level 2 - L2</td>
+            <td>Discussion and tasks are at a single sentence level with moderate support for talking and listening. Class is moderately paced with occasional repetition.</td>
+        </tr>
+        <tr>
+            <td>Level 3 - L3</td>
+            <td>Discussion and tasks are at a single word level with significant support for talking and listening. Class moves at a slower pace with frequent repetition.</td>
+        </tr>
+        <tr>
+            <td>Level 4 - L4</td>
+            <td>Discussion and tasks encourage use of talking, pointing, drawing, and gesturing with maximal support. Class moves slowly with consistent repetition.</td>
+        </tr>
+        <tr>
+            <td>All Levels - AL</td>
+            <td>These groups accommodate members of all communication abilities.</td>
+        </tr>
+        <tr>
+            <td>Fitness Group - GF</td>
+            <td>These coures allow survivors and family members to work together on balance, strength and mobility</td>
+        </tr>
+    </table>

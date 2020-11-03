@@ -5,9 +5,8 @@
 }
 
 <h2>Feedbacks</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="/TeamComeback_V2/Feedback/Create/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;Add Comment</a>
 </p>
 <table class="table">
     <tr>
@@ -23,7 +22,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-    </tr>
+        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <th></th>
+        }
+        </tr>
 
 @foreach (var item in Model) {
     <tr>
@@ -39,7 +42,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
+        @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
+        <td>@Html.ActionLink("Delete", "Delete", new { id = item.ID })</td>
+        }
     </tr>
 }
-
 </table>

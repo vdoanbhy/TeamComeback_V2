@@ -5,10 +5,10 @@
 
 <h2>@ViewBag.Title</h2>
 <p>
-    @Html.ActionLink("Register New User", "Register", "Account")
+    <a href="/TeamComeback_V2/Account/Register/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Add New</a>
 </p>
 
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)

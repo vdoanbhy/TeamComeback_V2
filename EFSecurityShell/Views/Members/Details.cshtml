@@ -92,7 +92,7 @@
 
     </dl>
     <h3>Current Enrollments: </h3>
-    <table class="table">
+    <table class="table table-striped">
         <tr>
             <th>
                 Course Title
@@ -145,10 +145,10 @@
         }
     </table>
     <h3>Your Balance: $@Model.Registars.Sum(i => i.Course.Cost)</h3>
-    <a href="https://stripe.com/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Pay Now</a>
+    <a href="https://stripe.com/" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Pay Now</a>
 </div>
 <br />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="/TeamComeback_V2/Members/Index/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Back</a> |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 </p>

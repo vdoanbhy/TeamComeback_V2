@@ -7,15 +7,15 @@
 
 <h2>@ViewBag.Title</h2>
 <p>
-@(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Sessions.TotalItemCount sessions
+    <a href="/TeamComeback_V2/Sessions/Create/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Session</a>
 </p>
 <p>
-    @Html.ActionLink("Create A New Session", "Create")
+    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Sessions.TotalItemCount sessions
 </p>
 @using (Html.BeginForm("Index", "Sessions", FormMethod.Get))
 {
-    @Html.TextBox("Search", null, new { @placeholder = "Search Sessions" })
-    <button type="submit" class="btn btn-sm">Submit</button>
+    <label>Search: </label>
+    @Html.TextBox("Search", null, new { @placeholder = "..." })
     <input type="hidden" name="Search" id="Search" value="@Model.Search" />
 }
 <table class="table">
@@ -45,9 +45,9 @@
                 @Html.DisplayFor(modelItem => item.DateEnd)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) <span class="glyphicon glyphicon-list" aria-hidden="true"></span> |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }) <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </td>
         </tr>
     }

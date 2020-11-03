@@ -27,7 +27,7 @@ namespace TeamComeback_V2.Controllers
             if (!String.IsNullOrEmpty(search))
             {
                 registars = registars.Where(r => r.Course.Name.Contains(search) || r.Course.Session.Name.Contains(search) ||
-                r.Member.LastName.Contains(search) || r.EnrollmentDate.ToString().Contains(search) || r.Member.FirstName.Contains(search)
+                r.Member.LastName.Contains(search) || r.Member.FirstName.Contains(search)
                 || r.Course.Time.Contains(search) || r.Course.Session.DateStart.ToString().Contains(search) || r.Course.Session.DateEnd.ToString().Contains(search)
                 );
                 ViewBag.Search = search;
@@ -40,7 +40,7 @@ namespace TeamComeback_V2.Controllers
             ViewBag.Attendance = new SelectList(attendances);
 
             registars = registars.OrderBy(p => p.Course.Name);
-            const int PageItems = 3;
+            const int PageItems = 10;
             int currentPage = (page ?? 1);
             viewModel.Registars = registars.ToPagedList(currentPage, PageItems);
             return View(viewModel);

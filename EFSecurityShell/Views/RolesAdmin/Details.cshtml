@@ -39,7 +39,8 @@
     }
 </table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id}) |
-    @Html.ActionLink("Back to List", "Index")
+
+    <a href="/TeamComeback_V2/RolesAdmin/Index/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Back</a> |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 </p>
 

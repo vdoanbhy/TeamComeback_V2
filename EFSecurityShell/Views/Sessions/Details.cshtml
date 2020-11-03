@@ -36,6 +36,5 @@
 
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <a href="/TeamComeback_V2/Sessions/Index/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Back</a> |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></p>

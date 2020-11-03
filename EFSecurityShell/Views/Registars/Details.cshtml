@@ -99,6 +99,6 @@
     </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RegistarID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="/TeamComeback_V2/Registars/Index/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Back</a> |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RegistarID }) <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 </p>

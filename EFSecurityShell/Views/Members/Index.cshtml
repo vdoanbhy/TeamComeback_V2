@@ -6,7 +6,7 @@
 
 <h2>Our Members</h2>
 <p>
-    <a href="/TeamComeback_V2/Members/Create/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Register New Member</a>
+    <a href="/TeamComeback_V2/Members/Create/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Member</a>
 </p>
 <p>
     @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Members.TotalItemCount members
@@ -16,10 +16,9 @@
 
 @using (Html.BeginForm("Index", "Members", FormMethod.Get))
 {
-    <label>Search: </label>
-    @Html.TextBox("Search", null, new { @placeholder = "Searh member" })
+    @Html.TextBox("Search", null, new { @placeholder = "Search Member" }) <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
     <div class="right">
-        <label>Filter by gender:</label> @Html.DropDownList("Gender", "All")
+        <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> @Html.DropDownList("Gender", "All")
         <input type="submit" class="btn btn-sm btn-primary" value="Filter" />
     </div>
     <input type="hidden" name="Search" id="Search" value="@Model.Search" />
@@ -94,9 +93,9 @@
                 @Html.DisplayFor(modelItem => item.DateOfLastStroke)
             </td>
             <td>
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"> @Html.ActionLink("Edit", "Edit", new { id = item.ID })</span> |
-                <span class="glyphicon glyphicon-list" aria-hidden="true"> @Html.ActionLink("Details", "Details", new { id = item.ID })</span> |
-                <span class="glyphicon glyphicon-trash aria-hidden="true"> @Html.ActionLink("Delete", "Delete", new { id = item.ID })</span>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) <span class="glyphicon glyphicon-list" aria-hidden="true"></span> |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }) <span class="glyphicon glyphicon-trash aria-hidden="true"></span>
             </td>
         </tr>
     }
@@ -109,6 +108,7 @@
         @Html.PagedListPager(Model.Members, page => Url.Action("Index",
             new
                 {
-                  Search = @Model.Search,page
+                  Search = @Model.Search,
+                     page
                 }))
     </div>
