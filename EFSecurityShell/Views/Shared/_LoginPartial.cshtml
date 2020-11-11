@@ -6,7 +6,7 @@
     @Html.AntiForgeryToken()
 
 <ul class="nav navbar-nav navbar-right">
-    @if (Request.IsAuthenticated)
+    @if (Request.IsAuthenticated && User.IsInRole("Member") || User.IsInRole("Employee") || User.IsInRole("Admin"))
     {
         <li class="dropdown">
             <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Actions<span class="caret"></span></a>

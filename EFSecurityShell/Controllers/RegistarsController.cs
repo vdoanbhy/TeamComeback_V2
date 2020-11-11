@@ -3,10 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using TeamComeback_V2.Data;
 using TeamComeback_V2.Models;
 using TeamComeback_V2.ViewModels;
@@ -156,6 +159,67 @@ namespace TeamComeback_V2.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void ExportToCSV()
+        {
+            List<Registar> registarList = db.Registars.ToList<Registar>();
+            StringWriter sw = new StringWriter();
+            sw.WriteLine("\"Session\",\"Name\",\"Day\",\"Time\",\"FirstName\",\"LastName\",\"DateStart\",\"DateEnd\",\"EnrollmentDate\",\"InstructorName\",\"Attendance\",\"Cost\"");
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=ExportedEnrollmentList.csv");
+            Response.ContentType = "text/csv";
+
+            foreach (var item in registarList)
+            {
+                sw.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\",\"{11}\"",
+                    item.Course.Session.Name,
+                    item.Course.Name,
+                    item.Course.Day,
+                    item.Course.Time,
+                    item.Member.FirstName,
+                    item.Member.LastName,
+                    item.Course.Session.DateStart,
+                    item.Course.Session.DateEnd,
+                    item.EnrollmentDate,
+                    item.Course.InstructorName,
+                    item.Attendance,
+                    item.Course.Cost)
+                    );
+            }
+            Response.Write(sw.ToString());
+            Response.End();
+        }
+        public void ExportToExcel()
+        {
+            List<Registar> registarList = db.Registars.ToList<Registar>();
+            var grid = new GridView();
+            grid.DataSource = from item in registarList
+                              select new
+                              {
+                                Session = item.Course.Session.Name,
+                                Name = item.Course.Name,
+                                Day = item.Course.Day,
+                                Time = item.Course.Time,
+                                FirstName = item.Member.FirstName,
+                                LastName = item.Member.LastName,
+                                DateStart = item.Course.Session.DateStart,
+                                DateEnd = item.Course.Session.DateEnd,
+                                EnrollmentDate = item.EnrollmentDate,
+                                InstructorName = item.Course.InstructorName,
+                                Attendance = item.Attendance,
+                                Cost = item.Course.Cost
+                              };
+            grid.DataBind();
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment; filename=ExportedEnrollmentList.xls");
+            Response.ContentType = "application/excel";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(sw);
+
+            grid.RenderControl(htmlTextWriter);
+            Response.Write(sw.ToString());
+            Response.End();
         }
     }
 }

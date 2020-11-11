@@ -218,9 +218,6 @@ namespace TeamComeback_V2.Controllers
             grid.RenderControl(htmlTextWriter);
             Response.Write(sw.ToString());
             Response.End();
-
         }
-
-
     }
 }

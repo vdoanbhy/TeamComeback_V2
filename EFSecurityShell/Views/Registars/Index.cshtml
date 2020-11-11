@@ -93,6 +93,10 @@
 </table>
 
 <div>
+    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Employee")) {
+        @Html.ActionLink(" CSV", "ExportToCSV", null, new { @class = "btn btn-primary btn-lg right fa fa-download" })
+        @Html.ActionLink(" EXCEL", "ExportToExcel", null, new { @class = "btn btn-success btn-lg right fa fa-download" })
+    }
     Page @(Model.Registars.PageCount < Model.Registars.PageNumber ? 0 :
         Model.Registars.PageNumber) of @Model.Registars.PageCount
         @Html.PagedListPager(Model.Registars, page => Url.Action("Index",
