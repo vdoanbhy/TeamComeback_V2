@@ -8,9 +8,13 @@
 <p>
     <a href="/TeamComeback_V2/Registars/Create/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-saved" aria-hidden="true"></span> Enroll</a>
 </p>
-<p>
-    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Registars.TotalItemCount enrollments
-</p>
+@if (Request.IsAuthenticated && User.IsInRole("Employee") || User.IsInRole("Admin"))
+{
+    <p>
+        @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Registars.TotalItemCount enrollments
+    </p>
+}
+
 
 @using (Html.BeginForm("Index", "Registars", FormMethod.Get))
 {
@@ -22,89 +26,91 @@
     <input type="hidden" name="Search" id="Search" value="@Model.Search" />
 
 }
-<table class="table">
-    <tr>
 
-        <th>
-            @Html.DisplayNameFor(model => model.Registars.First().Course)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Day)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Time)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Registars.First().MemberID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateStart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateEnd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Registars.First().Attendance)
-        </th>
-
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Registars)
-    {
+@if (Request.IsAuthenticated && User.IsInRole("Employee") || User.IsInRole("Admin"))
+{
+    <table class="table">
         <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Day)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Member.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Member.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Session.DateStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Session.DateEnd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attendance)
-            </td>
-
-            <td>
-                @Html.ActionLink(" ", "Edit", new { id = item.RegistarID }, new { @class = "btn btn-warning btn-sm fa fa-edit" })
-                @Html.ActionLink(" ", "Details", new { id = item.RegistarID }, new { @class = "btn btn-info btn-sm fa fa-list" })
-                @Html.ActionLink(" ", "Delete", new { id = item.RegistarID }, new { @class = "btn btn-danger btn-sm fa fa-trash" })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Registars.First().Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Registars.First().MemberID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Registars.First().Attendance)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model.Registars)
+        {
+            <tr>
 
-<div>
-    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Employee")) {
-        @Html.ActionLink(" CSV", "ExportToCSV", null, new { @class = "btn btn-primary btn-lg right fa fa-download" })
-        @Html.ActionLink(" EXCEL", "ExportToExcel", null, new { @class = "btn btn-success btn-lg right fa fa-download" })
-    }
-    Page @(Model.Registars.PageCount < Model.Registars.PageNumber ? 0 :
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Session.DateStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Session.DateEnd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Attendance)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.RegistarID }, new { @class = "btn btn-warning btn-sm fa fa-edit" })
+                    @Html.ActionLink(" ", "Details", new { id = item.RegistarID }, new { @class = "btn btn-info btn-sm fa fa-list" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.RegistarID }, new { @class = "btn btn-danger btn-sm fa fa-trash" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div>
+        @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Employee"))
+        {
+            @Html.ActionLink(" CSV", "ExportToCSV", null, new { @class = "btn btn-primary btn-lg right fa fa-download" })
+            @Html.ActionLink(" EXCEL", "ExportToExcel", null, new { @class = "btn btn-success btn-lg right fa fa-download" })
+        }
+        Page @(Model.Registars.PageCount < Model.Registars.PageNumber ? 0 :
         Model.Registars.PageNumber) of @Model.Registars.PageCount
         @Html.PagedListPager(Model.Registars, page => Url.Action("Index",
-            new
+                new
                 {
 
-                  Search = @Model.Search,
+            Search = @Model.Search,
 
-    page
-                }))
-    </div>
+            page
+        })) 
+</div>
+}

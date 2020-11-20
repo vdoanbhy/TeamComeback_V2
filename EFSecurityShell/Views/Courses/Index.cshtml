@@ -5,9 +5,18 @@
 }
 
 <h2>@ViewBag.Title</h2>
-<p>
-    <a href="/TeamComeback_V2/Courses/Create/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Course</a>
-</p>
+@if (Request.IsAuthenticated && User.IsInRole("Employee") || User.IsInRole("Admin"))
+{
+    <p>
+        <a href="/TeamComeback_V2/Courses/Create/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Course</a>
+    </p>
+}
+@if (Request.IsAuthenticated && User.IsInRole("Member"))
+{
+    <p>
+        <a href="/TeamComeback_V2/Registars/Create/" class="btn btn-primary" role="button" aria-disabled="true"><span class="glyphicon glyphicon-saved" aria-hidden="true"></span> Enroll</a>
+    </p>
+}
 <p>
     @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You search for " + Model.Search + " found")  @Model.Courses.TotalItemCount courses
 </p>
@@ -67,9 +76,15 @@
                 @Html.DisplayFor(modelItem => item.Cost)
             </td>
             <td>
-                @Html.ActionLink(" ", "Edit", new { id = item.CourseID }, new { @class = "btn btn-warning btn-sm fa fa-edit" }) 
+                @if (Request.IsAuthenticated && User.IsInRole("Employee") || User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink(" ", "Edit", new { id = item.CourseID }, new { @class = "btn btn-warning btn-sm fa fa-edit" })
+                }
                 @Html.ActionLink(" ", "Details", new { id = item.CourseID }, new { @class = "btn btn-info btn-sm fa fa-list" })
-                @Html.ActionLink(" ", "Delete", new { id = item.CourseID }, new { @class = "btn btn-danger btn-sm fa fa-trash" })
+                @if (Request.IsAuthenticated && User.IsInRole("Employee") || User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink(" ", "Delete", new { id = item.CourseID }, new { @class = "btn btn-danger btn-sm fa fa-trash" })
+                }
             </td>
         </tr>
     }

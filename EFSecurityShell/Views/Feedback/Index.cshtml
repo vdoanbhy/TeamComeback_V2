@@ -19,39 +19,39 @@
             <th>
                 @Html.DisplayNameFor(model => model.Comment)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
+                <th>
+                    @Html.DisplayNameFor(model => model.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
                 <th></th>
             }
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Answer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                {
-                    <td>
-                        @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm fa fa-trash" })
-                    </td>
-                }
-            </tr>
+        <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Answer) <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm fa fa-trash" })
+            </td>
+        }
+    </tr>
         }
     </table>

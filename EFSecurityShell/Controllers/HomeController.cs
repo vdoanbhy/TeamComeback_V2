@@ -51,5 +51,9 @@ namespace TeamComeback_V2.Controllers
         {
             return PartialView();
         }
+        public ActionResult Chat()
+        {
+            return View();
+        }
     }
 }
