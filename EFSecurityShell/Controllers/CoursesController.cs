@@ -13,7 +13,6 @@ using TeamComeback_V2.ViewModels;
 
 namespace TeamComeback_V2.Controllers
 {
-    [Authorize]
     public class CoursesController : Controller
     {
         private TeamComeback_V2Context db = new TeamComeback_V2Context();
@@ -83,6 +82,7 @@ namespace TeamComeback_V2.Controllers
             }
             return View(course);
         }
+        [Authorize(Roles ="Admin, Employee")]
 
         // GET: Courses/Create
         public ActionResult Create()
@@ -108,7 +108,7 @@ namespace TeamComeback_V2.Controllers
             ViewBag.SessionID = new SelectList(db.Sessions, "ID", "Name", course.SessionID);
             return View(course);
         }
-
+        [Authorize(Roles = "Admin, Employee")]
         // GET: Courses/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -141,7 +141,7 @@ namespace TeamComeback_V2.Controllers
             ViewBag.SessionID = new SelectList(db.Sessions, "ID", "Name", course.SessionID);
             return View(course);
         }
-
+        [Authorize(Roles = "Admin, Employee")]
         // GET: Courses/Delete/5
         public ActionResult Delete(int? id)
         {
