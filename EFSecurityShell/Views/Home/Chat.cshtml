@@ -47,8 +47,18 @@
             // Create a function that the hub can call back to display messages.
             chat.client.addNewMessageToPage = function (name, message) {
                 // Add the message to the page.
-                $('#discussion').append('<p><strong>' + htmlEncode(name)
-                    + '</strong>: ' + htmlEncode(message) + '<p>');
+                if (name == "Admin") {
+                    // Add the message to the page.
+                    $('#discussion').append('<p style="text-align:left; width:500px"><strong><span class="glyphicon glyphicon-cog" aria-hidden="true">&nbsp;</span>'
+                        + htmlEncode(name) + ' </strong>: ' + htmlEncode(message) + '</p>');
+                }
+                else if (name != "Admin") {
+                    // Add the message to the page.
+                    $('#discussion').append('<p style="color:blue;text-align:right;"><strong><span class="glyphicon glyphicon-user" aria-hidden="true">&nbsp;</span>'
+                        + htmlEncode(name) + ' </strong>: ' + htmlEncode(message) + '</p>');
+                }
+                //$('#discussion').append('<p><strong>' + htmlEncode(name)
+                //   + '</strong>: ' + htmlEncode(message) + '<p>');
             };
             // Get the user name and store it to prepend to messages.
             $('#displayname').val(prompt('Enter your name:', ''));
